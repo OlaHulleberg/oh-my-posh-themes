@@ -16,19 +16,14 @@
           "template": "{{ .Path }}",
           "type": "path"
         },
-		{
-			// Empty spacing between path and git
-			"background": "#1E1E1E", // Dark grey for a subtle background
-			"template": "\u00A0",
-			"type": "git" // Only visible in git directories because of this type
-		},
         {
-          "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF5555{{ end }}", // Red for changes
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FF5555{{ end }}", // Red for ahead/behind
-            "{{ if gt .Ahead 0 }}#FF5555{{ end }}", // Red for ahead
-            "{{ if gt .Behind 0 }}#FF5555{{ end }}" // Red for behind
-          ],
+          // Empty spacing between path and git
+          "background": "#1E1E1E", // Dark grey for a subtle background
+          "template": "\u00A0",
+          "type": "git" // Only visible in git directories because of this type
+        },
+        {
+          "background": "#FF5555", // Red
           "foreground": "#FFFFFF", // White text for contrast
           "powerline_symbol": "\ue0b0",
           "properties": {
