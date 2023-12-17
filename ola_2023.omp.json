@@ -1,0 +1,86 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#1E1E1E", // Dark grey for a subtle background
+          "foreground": "#FF5555", // Red for the text
+          "leading_diamond": "\ue0b6",
+          "properties": {
+            "folder_icon": "...",
+            "style": "agnoster_full"
+          },
+          "style": "diamond",
+          "template": "{{ .Path }}",
+          "type": "path"
+        },
+		{
+			// Empty spacing between path and git
+			"background": "#1E1E1E", // Dark grey for a subtle background
+			"template": "\u00A0",
+			"type": "git" // Only visible in git directories because of this type
+		},
+        {
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FF5555{{ end }}", // Red for changes
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FF5555{{ end }}", // Red for ahead/behind
+            "{{ if gt .Ahead 0 }}#FF5555{{ end }}", // Red for ahead
+            "{{ if gt .Behind 0 }}#FF5555{{ end }}" // Red for behind
+          ],
+          "foreground": "#FFFFFF", // White text for contrast
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "style": "diamond",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }} ",
+          "type": "git"
+        },
+        {
+          "background": "#1E1E1E", // Dark grey for a subtle background
+          "foreground": "#FFFFFF", // White text for clarity
+          "properties": {
+            "style": "dallas",
+            "threshold": 0
+          },
+          "style": "diamond",
+          "template": " {{ .FormattedMs }}s",
+          "trailing_diamond": "\ue0b0",
+          "type": "executiontime"
+        },
+        {
+          "background": "#FF0000", // Red for emphasis on status
+          "foreground": "#ffffff", // White text for contrast
+          "leading_diamond": "<transparent,background>\ue0b0</>",
+          "style": "diamond",
+          "template": "<transparent> \uf12a</> {{ reason .Code }} ",
+          "trailing_diamond": "\ue0b0",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "foreground": "#FF5555", // Red for the time
+          "properties": {
+            "time_format": "15:04"
+          },
+          "style": "diamond",
+          "template": "{{ .CurrentDate | date .Format }}",
+          "type": "time"
+        }
+      ],
+      "type": "rprompt"
+    }
+  ],
+  "console_title_template": "\u26a1 {{end}}{{.Folder | replace \"~\" \"🏠\"}} @ {{.HostName}}",
+  "final_space": true,
+  "version": 2
+}
